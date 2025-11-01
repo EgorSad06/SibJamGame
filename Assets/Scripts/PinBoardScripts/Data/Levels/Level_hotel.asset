@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2678a8c9939000d40a1a30701627e342, type: 3}
+  m_Name: Level_hotel
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  levelName: Level_1.asset
+  clues:
+  - {fileID: 11400000, guid: 3394da07e451dc64aaf091a6b132621f, type: 2}
+  - {fileID: 11400000, guid: 2e9a98b6e9c443a428d1269bfef53efb, type: 2}
+  correctConnections:
+  - clueA_ID: Clue_knife
+    clueB_ID: Clue_blood

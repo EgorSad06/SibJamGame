@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 100997255}
   - component: {fileID: 100997254}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: BoardArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -306,7 +306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 0.5482237, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -947,10 +947,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e021060579f2290498593117e266d2df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClueBoardManager
-  boardArea: {fileID: 0}
+  boardArea: {fileID: 100997253}
   linesContainer: {fileID: 484202359}
   clueCardPrefab: {fileID: 3624984022602352880, guid: eced5a126a5976748b09f8de0794557a, type: 3}
-  linePrefab: {fileID: 2933601844185317386, guid: 58482b3a8986c554e93c3c26481fb195, type: 3}
+  linePrefab: {fileID: 9162137892840157332, guid: 010ed59c52fa0fb4889c7901b3df0a88, type: 3}
   currentLevel: {fileID: 0}
 --- !u!1 &2096013899
 GameObject:

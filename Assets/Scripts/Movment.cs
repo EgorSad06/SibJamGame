@@ -2,16 +2,8 @@ using UnityEngine;
 
 public class Movment : MonoBehaviour
 {
-
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 8f;
-    //[SerializeField] private float jumpForce = 12f;
-
-    //[Header("Ground Check")]
-    //[SerializeField] private Transform groundCheck;
-    //[SerializeField] private float checkRadius = 0.2f;
-    //[SerializeField] private LayerMask groundLayer;
-
     private Rigidbody2D rb;
     private bool isGrounded;
 
@@ -22,23 +14,22 @@ public class Movment : MonoBehaviour
 
     void Update()
     {
-        //isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
-
         float moveInput = Input.GetAxisRaw("Horizontal");
         rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
 
-        //if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        //{
-        //    rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-        //}
+        // Поворот объекта в направлении движения
+        if (moveInput != 0)
+        {
+            FlipCharacter(moveInput);
+        }
     }
-    //не обязательно
-    //void OnDrawGizmosSelected()
-    //{
-    //    if (groundCheck != null)
-    //    {
-    //        Gizmos.color = Color.red;
-    //        Gizmos.DrawWireSphere(groundCheck.position, checkRadius);
-    //    }
-    //}
+
+    private void FlipCharacter(float direction)
+    {
+        // Если direction > 0 - двигаемся вправо, scale.x должен быть положительным
+        // Если direction < 0 - двигаемся влево, scale.x должен быть отрицательным
+        Vector3 scale = transform.localScale;
+        scale.x = Mathf.Sign(direction) * Mathf.Abs(scale.x);
+        transform.localScale = scale;
+    }
 }

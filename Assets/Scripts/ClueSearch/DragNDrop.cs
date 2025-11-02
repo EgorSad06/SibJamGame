@@ -6,6 +6,10 @@ public class DragNDrop : MonoBehaviour
     private Vector3 offset;
     void Update()
     {
+        DragCheck();
+    }
+    protected void DragCheck()
+    {
         if (isDragging)
         {
             // Follow mouse position

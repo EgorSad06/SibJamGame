@@ -1,29 +1,47 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
+[RequireComponent(typeof(Button))]
 public class ClueCard : MonoBehaviour
 {
     public Image photoImage;
     public TMP_Text titleText;
-    public ClueConnection connectionPoint;
-    public CanvasGroup canvasGroup;
+    public Image highlightImage; // полупрозрачная рамка/фон для выделения
 
     [HideInInspector] public ClueData data;
+    private Button btn;
 
     private void Awake()
     {
-        if (canvasGroup == null) canvasGroup = GetComponent<CanvasGroup>();
-        if (photoImage == null) photoImage = GetComponentInChildren<Image>();
-        if (titleText == null) titleText = GetComponentInChildren<TMP_Text>();
+        btn = GetComponent<Button>();
+        if (btn != null)
+        {
+            btn.onClick.AddListener(OnClicked);
+        }
+        if (highlightImage != null) highlightImage.gameObject.SetActive(false);
     }
 
     public void Initialize(ClueData clue)
     {
         data = clue;
-        if (titleText != null) titleText.text = clue != null ? clue.clueName : "";
-        if (photoImage != null && clue != null) photoImage.sprite = clue.clueImage;
-        if (connectionPoint != null) connectionPoint.parentCard = this;
-        Debug.Log($"[ClueCard] Initialized {name} with {clue?.clueName}");
+        if (photoImage != null) photoImage.sprite = clue?.clueImage;
+        if (titleText != null) titleText.text = clue?.clueName ?? "";
+    }
+
+    private void OnClicked()
+    {
+        ClueBoardManager.Instance.OnCardClicked(this);
+    }
+
+    public void SetSelected(bool selected)
+    {
+        if (highlightImage != null) highlightImage.gameObject.SetActive(selected);
+    }
+
+    private void OnDestroy()
+    {
+        if (btn != null) btn.onClick.RemoveListener(OnClicked);
     }
 }

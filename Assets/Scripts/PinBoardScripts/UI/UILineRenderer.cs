@@ -2,24 +2,22 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(CanvasRenderer))]
-[ExecuteAlways]
 public class UILineRenderer : MaskableGraphic
 {
-    [Header("Line Settings")]
-    public Color lineColor = Color.red;
-
     public RectTransform pointA;
     public RectTransform pointB;
-
-    [Range(1f, 10f)]
     public float thickness = 3f;
+    public Color lineColor = Color.red;
 
-    private Vector2[] positions = new Vector2[2];
+    protected override void Awake()
+    {
+        base.Awake();
+        color = lineColor; // базовый цвет
+    }
 
     public void SetPoints(RectTransform a, RectTransform b)
     {
-        pointA = a;
-        pointB = b;
+        pointA = a; pointB = b;
         SetVerticesDirty();
     }
 
@@ -33,25 +31,20 @@ public class UILineRenderer : MaskableGraphic
         Vector2 dir = (end - start).normalized;
         Vector2 normal = new Vector2(-dir.y, dir.x) * (thickness / 2f);
 
-        // 4 точки прямоугольника линии
-        UIVertex[] verts = new UIVertex[4];
-        verts[0].position = start - normal;
-        verts[1].position = start + normal;
-        verts[2].position = end + normal;
-        verts[3].position = end - normal;
+        UIVertex v = UIVertex.simpleVert;
+        v.color = lineColor;
 
-        for (int i = 0; i < 4; i++)
-        {
-            verts[i].color = lineColor;
-
-        }
+        var verts = new UIVertex[4];
+        verts[0] = v; verts[0].position = start - normal;
+        verts[1] = v; verts[1].position = start + normal;
+        verts[2] = v; verts[2].position = end + normal;
+        verts[3] = v; verts[3].position = end - normal;
 
         vh.AddUIVertexQuad(verts);
     }
 
     private void Update()
     {
-        // чтобы линия обновлялась в реальном времени при движении карточек
         if (pointA != null && pointB != null)
             SetVerticesDirty();
     }
